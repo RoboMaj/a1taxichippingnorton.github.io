@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Taxi Chipping Norton - Your Local Taxi Service</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Custom styles to apply the Inter font family */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+        }
+        /* Custom focus ring color */
+        .focus-ring-yellow {
+            --tw-ring-color: #f59e0b;
+        }
+        /* Responsive map container */
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio for mobile */
+        }
+        @media (min-width: 1024px) {
+             .map-container {
+                padding-top: 0;
+                height: 100%;
+             }
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="text-gray-300 pb-24 lg:pb-0">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo / Brand Name -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-white">
+                        A1 <span class="text-yellow-500">Taxi</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex lg:space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">About</a>
+                    <a href="#services" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">Services</a>
+                    <a href="#reviews" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">Reviews</a>
+                    <a href="#booking" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">Book a Taxi</a>
+                    <a href="#contact" class="text-gray-300 hover:text-yellow-500 transition-colors duration-300 font-medium">Contact</a>
+                </nav>
+
+                <!-- Call to Action Button -->
+                <div class="hidden lg:block">
+                    <a href="tel:+447528133960" class="flex items-center space-x-2 bg-yellow-500 text-gray-900 font-bold py-2 px-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Call Now</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-gray-900">
+            <a href="#home" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">Home</a>
+            <a href="#about" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">About</a>
+            <a href="#services" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">Services</a>
+            <a href="#reviews" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">Reviews</a>
+            <a href="#booking" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">Book a Taxi</a>
+            <a href="#contact" class="block py-3 px-4 text-sm text-gray-300 hover:bg-gray-800 hover:text-yellow-500">Contact</a>
+             <div class="p-4">
+                <a href="tel:+447528133960" class="w-full flex items-center justify-center space-x-2 bg-yellow-500 text-gray-900 font-bold py-3 px-4 rounded-lg hover:bg-yellow-400 transition-colors duration-300">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>Call Now</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative bg-gray-800">
+             <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('https://placehold.co/1920x1080/1a202c/333333?text=A1+Taxi');"></div>
+             <div class="absolute inset-0 bg-black opacity-60"></div>
+            <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48 text-center text-white z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+                    Reliable Taxi Service in <span class="text-yellow-500">Chipping Norton</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Fast, friendly, and affordable. For local trips, airport transfers, and more, we're here to get you there safely.
+                </p>
+                <a href="#booking" class="bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-lg text-lg hover:bg-yellow-400 transition-transform duration-300 inline-block transform hover:scale-105">
+                    Book Your Ride
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Welcome to Efficient Taxi Services</h2>
+                    <p class="text-yellow-500 font-semibold mt-1">A1 Taxis Chipping Norton</p>
+                    <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                </div>
+                <div class="mt-10 max-w-4xl mx-auto text-lg text-gray-400 space-y-6 text-center">
+                    <p>A1 Taxis provides an exceptional service for the customer where you can travel in luxury. Our spacious and reliable car is a leading and extremely popular choice in Chipping Norton.</p>
+                    <h3 class="text-2xl font-bold text-white pt-6">Why use A1 Taxis?</h3>
+                    <p>A1 Taxis have spectacularly low rates with a safe, comfortable and welcoming environment. Our cars are highly dependable, servicing Chipping Norton along with villages in West Oxfordshire, such as: Chipping Norton, Carterton, Bampton, Eynsham, Standlake, Burford and many more. Furthermore all our drivers are CRB checked and fully licensed.</p>
+                    <h3 class="text-2xl font-bold text-white pt-6">Traveling Long Distance?</h3>
+                    <p>A1 Taxis provide competitive prices for long distance travels and special offers to airports and train stations. There is never a dull moment on a long journey as we provide interesting and stimulating conversation throughout.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- New Service Description Section -->
+        <section class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Efficient Taxi Services - Affordable Transportation</h2>
+                    <p class="text-yellow-500 font-semibold mt-1">A1 Taxis Chippingnorton</p>
+                    <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                </div>
+                <div class="max-w-4xl mx-auto text-center text-gray-400">
+                    <h3 class="text-2xl font-bold text-white">OUR SERVICE</h3>
+                    <p class="mt-4 text-lg">With our wide ranging vehicles we can cater for virtually every form of our wheel transpiration that you require. Whilst our normal day-to-day Saloon cars cover the large majority of our work throughout the day and night, we also offer many other different vehicles including estate cars, executive vehicles.</p>
+                    <p class="mt-4 text-lg">Our aim is quite simple – that you enjoy your journey with us each and every time that you choose to use our company’s services.</p>
+                    <p class="mt-8 text-lg font-semibold text-white">For more details of our services please see:</p>
+                    <ul class="mt-4 inline-block text-left space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-yellow-500 mr-3"></i>Airport Transfers</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-yellow-500 mr-3"></i>Corporate Accounts</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-yellow-500 mr-3"></i>Student Taxi Services</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Core Services</h2>
+                    <p class="text-gray-400 mt-2">Comprehensive transport solutions for every need.</p>
+                    <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1: Airport Transfer -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-plane-departure text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Airport Transfers</h3>
+                        <p class="text-gray-400">Stress-free travel to and from all major UK airports. We track your flight to ensure timely pickups.</p>
+                    </div>
+
+                    <!-- Service Card 2: Local Journeys -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-map-location-dot text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Local Journeys</h3>
+                        <p class="text-gray-400">Quick and reliable rides around Chipping Norton and the surrounding areas. Perfect for shopping or appointments.</p>
+                    </div>
+
+                    <!-- Service Card 3: Train Stations -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-train-subway text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Train Station Runs</h3>
+                        <p class="text-gray-400">Never miss your train again. We provide prompt service to all nearby train stations.</p>
+                    </div>
+                    
+                    <!-- Service Card 4: Business Travel -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-briefcase text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Business Travel</h3>
+                        <p class="text-gray-400">Professional and discreet service for corporate clients. Arrive at your meetings in comfort and style.</p>
+                    </div>
+
+                    <!-- Service Card 5: Tour Transport -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-route text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Cotswolds Tours</h3>
+                        <p class="text-gray-400">Explore the beauty of the Cotswolds with our bespoke tour services. We know all the best spots.</p>
+                    </div>
+                    
+                    <!-- Service Card 6: Special Events -->
+                    <div class="bg-gray-900 rounded-lg p-8 text-center transform hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fa-solid fa-champagne-glasses text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Special Events</h3>
+                        <p class="text-gray-400">Reliable transport for weddings, parties, and other events. Travel safely without worrying about the drive home.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">What Our Customers Say</h2>
+                    <p class="text-gray-400 mt-2">Real feedback from our valued clients.</p>
+                    <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                </div>
+                <!-- Elfsight Google Reviews Widget -->
+                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                <div class="elfsight-app-38c44c07-e0de-4d48-9c34-a6445c743b57" data-elfsight-app-lazy></div>
+            </div>
+        </section>
+
+        <!-- Booking & Map Section -->
+        <section id="booking" class="py-20 bg-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Book a Taxi</h2>
+                    <p class="text-gray-400 mt-2">Fill out the form below or give us a call.</p>
+                     <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <!-- Booking Form -->
+                    <div class="lg:w-1/2 bg-gray-900 p-8 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-bold text-white mb-6">Booking Details</h3>
+                        
+                        <!-- 
+                            IMPORTANT INSTRUCTION TO ACTIVATE THE FORM:
+                            1. Go to https://formspree.io/ and sign up for a free account.
+                            2. Create a new form and set the destination email to a1taxichippingnorton@gmail.com.
+                            3. Formspree will give you a unique URL or ID. Replace 'YOUR_FORM_ID' in the action URL below with your actual Formspree form ID.
+                            For example, if your URL is https://formspree.io/f/abcdefgh, the action should be "https://formspree.io/f/abcdefgh".
+                        -->
+                        <form id="booking-form" action="https://formspree.io/f/mpwldkzo" method="POST">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <!-- Name -->
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                                    <input type="text" name="name" id="name" required class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition">
+                                </div>
+                                <!-- Phone -->
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone Number</label>
+                                    <input type="tel" name="phone" id="phone" required class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition">
+                                </div>
+                            </div>
+                            <!-- Email (Optional) -->
+                            <div class="mt-6">
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address (Optional)</label>
+                                <input type="email" name="email" id="email" class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition">
+                            </div>
+                            <!-- Pickup Address -->
+                            <div class="mt-6">
+                                <label for="pickup" class="block text-sm font-medium text-gray-300 mb-1">Pick Up Address</label>
+                                <input type="text" name="pickup" id="pickup" required class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition">
+                            </div>
+                            <!-- Dropoff Address -->
+                            <div class="mt-6">
+                                <label for="dropoff" class="block text-sm font-medium text-gray-300 mb-1">Drop Off Address</label>
+                                <input type="text" name="dropoff" id="dropoff" required class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition">
+                            </div>
+                            <!-- Date & Time -->
+                            <div class="mt-6">
+                                <label for="datetime" class="block text-sm font-medium text-gray-300 mb-1">Date & Time</label>
+                                <input type="datetime-local" name="datetime" id="datetime" required class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition appearance-none">
+                            </div>
+                             <!-- Message (Optional) -->
+                            <div class="mt-6">
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message (Optional)</label>
+                                <textarea name="message" id="message" rows="3" class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-3 focus:ring-2 focus-ring-yellow focus:border-yellow-500 transition"></textarea>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="mt-8">
+                                <button type="submit" class="w-full bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg text-lg hover:bg-yellow-400 transition-transform duration-300 transform hover:scale-105">
+                                    Send Booking Request
+                                </button>
+                            </div>
+                        </form>
+                        <p id="form-status" class="mt-4 text-center"></p>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="lg:w-1/2">
+                        <div class="map-container rounded-lg overflow-hidden shadow-xl">
+                           <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2459.90184499119!2d-1.5510666236940808!3d51.95475997191764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876d37016335165%3A0x8e8b83a0f7d5497c!2s68%20Walterbush%20Rd%2C%20Chipping%20Norton%20OX7%205DW%2C%20UK!5e0!3m2!1sen!2sus!4v1721921430931!5m2!1sen!2sus"
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                           </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-800">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold text-white">Get In Touch</h2>
+                 <p class="text-gray-400 mt-2">We're available 24/7. Call us for immediate bookings.</p>
+                 <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
+                 
+                 <div class="mt-12 flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12">
+                     <div class="text-center">
+                         <div class="bg-gray-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-phone text-yellow-500 text-3xl"></i>
+                         </div>
+                         <h3 class="text-xl font-semibold text-white">Phone</h3>
+                         <a href="tel:+447528133960" class="text-lg text-yellow-500 hover:text-yellow-400 transition-colors">07528 133960</a>
+                     </div>
+                     
+                     <div class="text-center">
+                         <div class="bg-gray-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-envelope text-yellow-500 text-3xl"></i>
+                         </div>
+                         <h3 class="text-xl font-semibold text-white">Email</h3>
+                         <a href="mailto:a1taxichippingnorton@gmail.com" class="text-lg text-yellow-500 hover:text-yellow-400 transition-colors">a1taxichippingnorton@gmail.com</a>
+                     </div>
+
+                     <div class="text-center">
+                         <div class="bg-gray-900 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-map-marker-alt text-yellow-500 text-3xl"></i>
+                         </div>
+                         <h3 class="text-xl font-semibold text-white">Address</h3>
+                         <p class="text-lg text-gray-300">68 Walterbush Road, Chipping Norton, OX7 5DW</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2024 A1 Taxi Chipping Norton. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Website designed by Gemini</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-4">
+        <a href="https://wa.me/447528133960" target="_blank" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </a>
+        <a href="tel:+447528133960" class="bg-yellow-500 text-gray-900 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform">
+            <i class="fa-solid fa-phone text-2xl"></i>
+        </a>
+    </div>
+
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a, nav a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // FormSpree form handling
+        const form = document.getElementById("booking-form");
+        const status = document.getElementById("form-status");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            if (form.action.includes("YOUR_FORM_ID")) {
+                status.textContent = "Form not active. Please set up the form action in the HTML code.";
+                status.style.color = 'red';
+                return;
+            }
+
+            status.textContent = "Sending...";
+            status.style.color = 'white';
+            
+            const data = new FormData(event.target);
+
+            try {
+                const response = await fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    status.textContent = "Thanks for your booking! We'll be in touch soon.";
+                    status.style.color = 'lightgreen';
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (responseData && responseData.errors) {
+                        status.textContent = responseData.errors.map(error => error.message).join(", ");
+                    } else {
+                        status.textContent = "Oops! There was a problem submitting your form.";
+                    }
+                    status.style.color = 'red';
+                }
+            } catch (error) {
+                status.textContent = "Oops! There was a problem submitting your form.";
+                status.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
