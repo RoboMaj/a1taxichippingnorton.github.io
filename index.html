@@ -261,7 +261,7 @@
                             3. Formspree will give you a unique URL or ID. Replace 'YOUR_FORM_ID' in the action URL below with your actual Formspree form ID.
                             For example, if your URL is https://formspree.io/f/abcdefgh, the action should be "https://formspree.io/f/abcdefgh".
                         -->
-                        <form id="booking-form" action="https://formspree.io/f/xjkowlbj" method="POST">
+                        <form id="booking-form" action="https://script.google.com/macros/s/AKfycbzf8oaEkEUDtOidLQR5gIdF1L6KZqByyZ3fFfobx2RcXfYffuOCcfLeLormge9ANl-J/exec" method="POST">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <!-- Name -->
                                 <div>
@@ -378,70 +378,60 @@
     </div>
 
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+   <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
 
-        // Close mobile menu when a link is clicked
-        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a, nav a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        
-        // FormSpree form handling
-        const form = document.getElementById("booking-form");
-        const status = document.getElementById("form-status");
-
-        form.addEventListener("submit", async function(event) {
-            event.preventDefault();
-            
-            if (form.action.includes("YOUR_FORM_ID")) {
-                status.textContent = "Form not active. Please set up the form action in the HTML code.";
-                status.style.color = 'red';
-                return;
+    // Close mobile menu when a link is clicked
+    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a, nav a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
             }
+        });
+    });
+    
+    // Google Apps Script form handling
+    const form = document.getElementById("booking-form");
+    const status = document.getElementById("form-status");
 
-            status.textContent = "Sending...";
-            status.style.color = 'white';
-            
-            const data = new FormData(event.target);
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        
+        status.textContent = "Sending...";
+        status.style.color = 'white';
+        
+        const data = new FormData(form);
 
-            try {
-                const response = await fetch(event.target.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+            });
 
-                if (response.ok) {
-                    status.textContent = "Thanks for your booking! We'll be in touch soon.";
-                    status.style.color = 'lightgreen';
-                    form.reset();
-                } else {
-                    const responseData = await response.json();
-                    if (responseData && responseData.errors) {
-                        status.textContent = responseData.errors.map(error => error.message).join(", ");
-                    } else {
-                        status.textContent = "Oops! There was a problem submitting your form.";
-                    }
-                    status.style.color = 'red';
-                }
-            } catch (error) {
+            const result = await response.json();
+
+            if (result.result === 'success') {
+                status.textContent = "Thanks for your booking! We'll be in touch soon.";
+                status.style.color = 'lightgreen';
+                form.reset();
+            } else {
                 status.textContent = "Oops! There was a problem submitting your form.";
                 status.style.color = 'red';
+                console.error('Error from Google Script:', result.error);
             }
-        });
-    </script>
+        } catch (error) {
+            status.textContent = "Oops! There was a problem submitting your form.";
+            status.style.color = 'red';
+            console.error('Fetch Error:', error);
+        }
+    });
+</script>
 </body>
 </html>
