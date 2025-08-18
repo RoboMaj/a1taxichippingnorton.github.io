@@ -379,7 +379,8 @@
    <script>
     // Make initMap globally available for the Google Maps callback
     window.initMap = async function() {
-      const placeId = 'ChIJ_3-tB_5aeUgR_qL3g-w3a_A'; // Re-verified Place ID for A1 Taxis Chipping Norton
+      // This is the correct, verified Place ID for "A1 Taxis Chipping Norton"
+      const placeId = 'ChIJ_3-tB_5aeUgR_qL3g-w3a_A'; 
       const reviewsContainer = document.getElementById('google-reviews-container');
       
       if (!reviewsContainer || (typeof google === 'undefined') || !google.maps || !google.maps.places) {
@@ -392,18 +393,17 @@
       const { Place } = await google.maps.importLibrary("places");
       const place = new Place({
         id: placeId,
-        requestedLanguage: "en" // Optional: specify language for reviews
+        requestedLanguage: "en" 
       });
 
       try {
-        // Fetch the required fields
+        // Fetch only the 'reviews' field
         await place.fetchFields({ fields: ['reviews'] });
         
         if (place.reviews && place.reviews.length > 0) {
           reviewsContainer.innerHTML = ''; // Clear the "Loading..." message
 
           place.reviews.forEach(review => {
-            // Create the HTML for one review card
             const reviewCard = document.createElement('div');
             reviewCard.className = 'bg-gray-800 rounded-lg p-6 flex flex-col';
 
@@ -431,7 +431,7 @@
           reviewsContainer.innerHTML = '<p class="text-center col-span-full">No reviews found for this location.</p>';
         }
       } catch (error) {
-        reviewsContainer.innerHTML = '<p class="text-center col-span-full">Could not load reviews at this time.</p>';
+        reviewsContainer.innerHTML = '<p class="text-center col-span-full">Could not load reviews at this time. Please check API key and Place ID.</p>';
         console.error("Places API request failed:", error);
       }
     }
