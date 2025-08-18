@@ -50,6 +50,8 @@
             border: 0;
         }
     </style>
+    <!-- IMPORTANT: Add your Google API Key here -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" defer></script>
 </head>
 <body class="text-gray-300 pb-24 lg:pb-0">
 
@@ -234,9 +236,12 @@
                     <p class="text-gray-400 mt-2">Real feedback from our valued clients.</p>
                     <div class="inline-block w-20 h-1 bg-yellow-500 rounded mt-4"></div>
                 </div>
-                <!-- Elfsight Google Reviews Widget -->
-                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                <div class="elfsight-app-38c44c07-e0de-4d48-9c34-a6445c743b57" data-elfsight-app-lazy></div>
+                
+                <!-- This div will be filled with reviews by the script -->
+                <div id="google-reviews-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading message -->
+                    <p class="text-center col-span-full">Loading reviews...</p>
+                </div>
             </div>
         </section>
 
@@ -254,7 +259,6 @@
                     <div class="lg:w-1/2 bg-gray-900 p-8 rounded-lg shadow-xl">
                         <h3 class="text-2xl font-bold text-white mb-6">Booking Details</h3>
                         
-    
                         <form id="booking-form" action="https://script.google.com/macros/s/AKfycbzf8oaEkEUDtOidLQR5gIdF1L6KZqByyZ3fFfobx2RcXfYffuOCcfLeLormge9ANl-J/exec" method="POST">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <!-- Name -->
@@ -307,7 +311,7 @@
                     <div class="lg:w-1/2">
                         <div class="map-container rounded-lg overflow-hidden shadow-xl">
                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2459.90184499119!2d-1.5510666236940808!3d51.95475997191764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876d37016335165%3A0x8e8b83a0f7d5497c!2s68%20Walterbush%20Rd%2C%20Chipping%20Norton%20OX7%205DW%2C%20UK!5e0!3m2!1sen!2sus!4v1721921430931!5m2!1sen!2sus"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2459.90184499119!2d-1.5510666236940808!3d51.95475997191764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876d37016335165%3A0x8e8b3a0f7d5497c!2s68%20Walterbush%20Rd%2C%20Chipping%20Norton%20OX7%205DW%2C%20UK!5e0!3m2!1sen!2sus!4v1721921430931!5m2!1sen!2sus"
                                 allowfullscreen="" 
                                 loading="lazy" 
                                 referrerpolicy="no-referrer-when-downgrade">
@@ -426,6 +430,58 @@
             console.error('Fetch Error:', error);
         }
     });
+
+    // Google Places API for Reviews
+    function initMap() {
+      const placeId = 'ChIJ_3-tB_5aeUgR_qL3g-w3a_A'; // This is the Place ID for A1 Taxis Chipping Norton
+      const reviewsContainer = document.getElementById('google-reviews-container');
+      
+      if (!reviewsContainer || (typeof google === 'undefined') || !google.maps || !google.maps.places) {
+          console.error("Google Maps Places API not loaded or container not found.");
+          if(reviewsContainer) reviewsContainer.innerHTML = '<p class="text-center col-span-full">Error loading Google Reviews script.</p>';
+          return;
+      };
+
+      const service = new google.maps.places.PlacesService(document.createElement('div'));
+
+      service.getDetails({
+        placeId: placeId,
+        fields: ['name', 'rating', 'reviews']
+      }, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK && place && place.reviews) {
+          reviewsContainer.innerHTML = ''; // Clear the "Loading..." message
+
+          place.reviews.forEach(review => {
+            // Create the HTML for one review card
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'bg-gray-800 rounded-lg p-6 flex flex-col';
+
+            let starsHTML = '';
+            for (let i = 0; i < 5; i++) {
+              starsHTML += `<i class="fa-solid fa-star ${i < review.rating ? 'text-yellow-500' : 'text-gray-600'}"></i>`;
+            }
+
+            reviewCard.innerHTML = `
+              <div class="text-yellow-500 mb-4">${starsHTML}</div>
+              <div class="flex-grow">
+                <p class="text-gray-400">"${review.text}"</p>
+              </div>
+              <div class="flex items-center mt-6">
+                <img class="h-12 w-12 rounded-full object-cover" src="${review.profile_photo_url}" alt="${review.author_name}">
+                <div class="ml-4">
+                  <p class="font-bold text-white">${review.author_name}</p>
+                  <p class="text-sm text-gray-500">${review.relative_time_description}</p>
+                </div>
+              </div>
+            `;
+            reviewsContainer.appendChild(reviewCard);
+          });
+        } else {
+          reviewsContainer.innerHTML = '<p class="text-center col-span-full">Could not load reviews at this time.</p>';
+          console.error("Places API request failed with status: " + status);
+        }
+      });
+    }
 </script>
 </body>
 </html>
