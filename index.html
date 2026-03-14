@@ -384,6 +384,21 @@
 
 
    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+
+            gtag('event', 'conversion', {
+                    'send_to': 'AW-959771720/lOngCJC1wogcEMjo08kD',
+                    'event_callback': callback
+            });
+
+            return false;
+        }
+
     // Make initMap globally available for the Google Maps callback
     window.initMap = async function() {
       // This is the correct, verified Place ID for "A1 Taxis Chipping Norton"
@@ -466,9 +481,12 @@
         // Google Apps Script form handling
         const form = document.getElementById("booking-form");
         const status = document.getElementById("form-status");
+        const submitButton = form.querySelector('button[type="submit"]');
 
         form.addEventListener("submit", async function(event) {
             event.preventDefault();
+
+            submitButton.disabled = true;
             
             status.textContent = "Sending...";
             status.style.color = 'white';
@@ -484,6 +502,7 @@
                 const result = await response.json();
 
                 if (result.result === 'success') {
+                    gtag_report_conversion();
                     status.textContent = "Thanks for your booking! We'll be in touch soon.";
                     status.style.color = 'lightgreen';
                     form.reset();
@@ -496,6 +515,8 @@
                 status.textContent = "Oops! There was a problem submitting your form.";
                 status.style.color = 'red';
                 console.error('Fetch Error:', error);
+            } finally {
+                submitButton.disabled = false;
             }
         });
     });
